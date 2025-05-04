@@ -29,7 +29,7 @@ public class UsuariosController {
 
 	@GetMapping
 	public String listarUsuarios(Model model) {
-		model.addAttribute("usuarios", usuariosService.getAllUsuarios());
+		model.addAttribute("usuarios", usuariosService.getAlls());
 		return "usuarios/listar";
 	}
 

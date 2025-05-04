@@ -36,7 +36,7 @@ public class UsuariosServiceImpl implements UserDetailsService, UsuariosService 
 	}
 
 	@Override
-	public List<Usuarios> getAllUsuarios() {
+	public List<Usuarios> getAlls() {
 		return this.usuariosRepository.findByAll();
 	}
 

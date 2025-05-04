@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Formulario Mercaderías</title>
+
+    <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700,900" rel="stylesheet">
+    <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+
+        <!-- Sidebar omitido por brevedad. Puedes reutilizar el mismo. -->
+
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+                <!-- Topbar omitido por brevedad. Puedes reutilizar el mismo. -->
+
+                <div class="container-fluid">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <div class="container mt-5">
+                            <h1 th:text="${Mercaderias.id == null ? 'Nueva Mercadería' : 'Editar Mercadería'}"></h1>
+
+                            <form th:action="@{/Mercaderias/guardar}" th:object="${Mercaderias}" method="post">
+                                <input type="hidden" th:field="*{id}" />
+
+                                <!-- Descripción -->
+                                <div class="form-group">
+                                    <label for="descripcion">Descripción</label>
+                                    <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}" required />
+                                </div>
+
+                                <!-- Afecta Existencia -->
+                                <div class="form-group">
+                                    <label for="afectaExistencia">Afecta Existencia</label>
+                                    <input type="text" class="form-control" id="afectaExistencia" th:field="*{afectaExistencia}" maxlength="1" required />
+                                </div>
+
+                                <!-- Precio Compra -->
+                                <div class="form-group">
+                                    <label for="precioCompra">Precio de Compra</label>
+                                    <input type="number" step="0.01" class="form-control" id="precioCompra" th:field="*{precioCompra}" required />
+                                </div>
+
+                                <!-- Precio Venta -->
+                                <div class="form-group">
+                                    <label for="precioVenta">Precio de Venta</label>
+                                    <input type="number" step="0.01" class="form-control" id="precioVenta" th:field="*{precioVenta}" required />
+                                </div>
+
+                                <!-- Dirección -->
+                                <div class="form-group">
+                                    <label for="direccion">Dirección</label>
+                                    <input type="text" class="form-control" id="direccion" th:field="*{direccion}" required />
+                                </div>
+
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" th:field="*{email}" required />
+                                </div>
+
+                                <!-- Razon Social -->
+                                <div class="form-group">
+                                    <label for="razonSocial">Razón Social</label>
+                                    <input type="text" class="form-control" id="razonSocial" th:field="*{razonSocial}" required />
+                                </div>
+
+                                <!-- RUC -->
+                                <div class="form-group">
+                                    <label for="ruc">RUC</label>
+                                    <input type="text" class="form-control" id="ruc" th:field="*{ruc}" required />
+                                </div>
+
+                                <!-- Teléfono -->
+                                <div class="form-group">
+                                    <label for="telefono">Teléfono</label>
+                                    <input type="text" class="form-control" id="telefono" th:field="*{telefono}" required />
+                                </div>
+
+                                <!-- Tipo Persona -->
+                                <div class="form-group">
+                                    <label for="tipoPersona">Tipo Persona</label>
+                                    <input type="text" class="form-control" id="tipoPersona" th:field="*{tipoPersona}" required />
+                                </div>
+
+                                <!-- Proveedor -->
+                                <div class="form-group">
+                                    <label for="proveedor">Proveedor</label>
+                                    <select class="form-control" id="proveedor" th:field="*{proveedor.id}" required>
+                                        <option value="" disabled selected>Seleccione un Proveedor</option>
+                                        <option th:each="p : ${proveedores}" th:value="${p.id}" th:text="${p.razonSocial}"></option>
+                                    </select>
+                                </div>
+
+                                <!-- Marca -->
+                                <div class="form-group">
+                                    <label for="marca">Marca</label>
+                                    <select class="form-control" id="marca" th:field="*{marca.id}" required>
+                                        <option value="" disabled selected>Seleccione una Marca</option>
+                                        <option th:each="m : ${marca}" th:value="${m.id}" th:text="${m.descripcion}"></option>
+                                    </select>
+                                </div>
+
+                                <!-- Tipo de Impuesto -->
+                                <div class="form-group">
+                                    <label for="tipoImpuesto">Tipo de Impuesto</label>
+                                    <select class="form-control" id="tipoImpuesto" th:field="*{tipoImpuesto.id}" required>
+                                        <option value="" disabled selected>Seleccione un Impuesto</option>
+                                        <option th:each="t : ${tipoImpuesto}" th:value="${t.id}" th:text="${t.descripcion}"></option>
+                                    </select>
+                                </div>
+
+                                <!-- Barrio -->
+                                <div class="form-group">
+                                    <label for="barrio">Barrio</label>
+                                    <select class="form-control" id="barrio" th:field="*{barrio.id}" required>
+                                        <option value="" disabled selected>Seleccione un Barrio</option>
+                                        <option th:each="b : ${barrio}" th:value="${b.id}" th:text="${b.descripcion}"></option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="/Mercaderias" class="btn btn-secondary">Cancelar</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <script src="/resources/vendor/jquery/jquery.min.js"></script>
+    <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/resources/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>

@@ -6,7 +6,8 @@ import java.util.Optional;
 import com.example.demo.models.Usuarios;
 
 public interface UsuariosService {
-	List<Usuarios> getAllUsuarios();
+	
+	List<Usuarios> getAlls();
 
 	Optional<Usuarios> getUsuarioById(Long id);
 
